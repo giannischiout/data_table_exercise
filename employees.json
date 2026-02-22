@@ -1,0 +1,72 @@
+[
+  {
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "email": "sarah.johnson@company.com",
+    "department": "Engineering",
+    "status": "Active"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Chen",
+    "email": "michael.chen@company.com",
+    "department": "Product",
+    "status": "Active"
+  },
+  {
+    "firstName": "Emily",
+    "lastName": "Davis",
+    "email": "emily.davis@company.com",
+    "department": "Marketing",
+    "status": "Active"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Wilson",
+    "email": "james.wilson@company.com",
+    "department": "Sales",
+    "status": "On Leave"
+  },
+  {
+    "firstName": "Maria",
+    "lastName": "Garcia",
+    "email": "maria.garcia@company.com",
+    "department": "Human Resources",
+    "status": "Active"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Martinez",
+    "email": "david.martinez@company.com",
+    "department": "Engineering",
+    "status": "Active"
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "Anderson",
+    "email": "lisa.anderson@company.com",
+    "department": "Finance",
+    "status": "Active"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Taylor",
+    "email": "robert.taylor@company.com",
+    "department": "Operations",
+    "status": "Inactive"
+  },
+  {
+    "firstName": "Jennifer",
+    "lastName": "Thomas",
+    "email": "jennifer.thomas@company.com",
+    "department": "Customer Support",
+    "status": "Active"
+  },
+  {
+    "firstName": "Christopher",
+    "lastName": "Lee",
+    "email": "christopher.lee@company.com",
+    "department": "Engineering",
+    "status": "Active"
+  }
+]
