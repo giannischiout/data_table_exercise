@@ -4,8 +4,8 @@ import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router'
 import { routes } from './routes/index.tsx'
-
-
+import { Provider } from 'react-redux'
+import { store } from './store/configure.ts'
 
 const router = createBrowserRouter([
   {
@@ -21,8 +21,12 @@ const router = createBrowserRouter([
 
   }
 ])
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 )
