@@ -2,12 +2,13 @@ import useSWR from "swr";
 import type {IUser} from "../types/";
 
 type Params = {
-  deparment: string;
-  search: string;
+  deparment?: string;
+  search?: string;
+  id?: string;
 }
 type Props = {
   endpoint: string;
-  params?: Params; // allow extra keys
+  params?: Params; 
 
 }
 
@@ -16,7 +17,7 @@ type Props = {
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 export function useGetData({endpoint, params}: Props) {
-    const {deparment = "", search = ""} = params || {};
+    const {deparment = "", search = "", id} = params || {};
     const {data, isLoading, error} = useSWR<IUser[]>(endpoint, fetcher)
 
     const filteredData = data?.filter((item) => {
@@ -27,7 +28,9 @@ export function useGetData({endpoint, params}: Props) {
       item.email.toLowerCase().includes(search.toLowerCase()) : 
       true;
 
-      return matchDeparment && matchSearch;
+      const matchId = id ? item.id === Number(id) : true
+
+      return matchDeparment && matchSearch && matchId;
     })
   return {data: filteredData, isLoading, error}
 }

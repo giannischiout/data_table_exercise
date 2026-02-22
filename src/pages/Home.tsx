@@ -45,7 +45,6 @@ const COLUMNS: ITableColumn<IUser>[] = [
     id: 5,
     header: 'Actions',
     render: (row, actionHandlers) => {
-      console.log({actionHandlers})
       return (
         <div>
         <div onClick={() => {
@@ -144,7 +143,6 @@ export function SelectInput({
     </div>
   )
 }
-
 
 type ISearchInput = {
   onChange: ChangeEventHandler<HTMLInputElement>
