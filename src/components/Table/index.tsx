@@ -4,6 +4,7 @@ import { Table as MuiTable, TableBody, TableCell, TableHead, TableRow } from '@m
 import type { ITable } from '../../types';
 import styles from './style.module.scss'
 export default function Table<T>({
+  actionHandlers,
   data,
   columns,
   toolbar,
@@ -28,17 +29,21 @@ export default function Table<T>({
             >
               {columns.map((col) => (
                 <TableCell
+                  key={col.id}
                   component="th"
                   scope="row">
-                  {col.render(item)}
+                  {col.render(item, actionHandlers)}
                 </TableCell>
               ))}
              
             </TableRow>
           )): (
-            <div>
+            <TableRow>
+              <div>
               There is no data to show
-            </div>
+
+              </div>
+            </TableRow>
           )}
         </TableBody>
       </MuiTable>

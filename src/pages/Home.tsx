@@ -1,10 +1,12 @@
-import type { ChangeEvent, ChangeEventHandler, ReactEventHandler } from "react"
+import type { ChangeEvent, ChangeEventHandler } from "react"
 import { useGetData } from "../actions/useGetData"
 import Table from "../components/Table"
 import type { ITableColumn, IUser } from "../types"
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/configure"
 import { setFilters } from "../store/employees"
+import { Eye } from "lucide-react"
+import { useNavigate } from "react-router"
 
 const DEPARTMENTS: IOption[] = [
   { label: '', value: '' },
@@ -33,10 +35,32 @@ const COLUMNS: ITableColumn<IUser>[] = [
     id: 3,
     header: 'Deparment',
     render: (row) => <>{row.department}</>
+  },
+  {
+    id: 4,
+    header: 'Status',
+    render: (row) => <>{row.status}</>
+  },
+  {
+    id: 5,
+    header: 'Actions',
+    render: (row, actionHandlers) => {
+      console.log({actionHandlers})
+      return (
+        <div>
+        <div onClick={() => {
+          actionHandlers?.onView?.(row.id.toString())
+        }}>
+        <Eye />
+        </div>
+      </div>
+      )
+    }
   }
 ]
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { filters } = useSelector((state: RootState) => state.employees)
 
@@ -49,12 +73,19 @@ export default function HomePage() {
     endpoint: '/employees.json',
     params: filters,
   })
+
+  const actionHandlers = {
+    onView: (id: string) => {
+      navigate(`/employee/${id}`)
+    }
+  }
   return (
     <div>
       <Table
         getKey={(row) => row.id.toString()}
         data={data || []}
         columns={COLUMNS}
+        actionHandlers={actionHandlers}
         toolbar={
           <div className="employees_toolbar">
             <SearchInput
@@ -103,7 +134,7 @@ export function SelectInput({
   return (
     <div className="input_wrapper">
       <select
-        value={value.value}
+        value={value}
         onChange={onChange}
         id={id} name={name}>
         {options.map((option) => (
