@@ -38,11 +38,10 @@ export default function Table<T>({
              
             </TableRow>
           )): (
-            <TableRow>
-              <div>
-              There is no data to show
-
-              </div>
+            <TableRow sx={{
+              padding: '10px'
+            }}>
+              <TableCell>There is no data to show</TableCell>
             </TableRow>
           )}
         </TableBody>

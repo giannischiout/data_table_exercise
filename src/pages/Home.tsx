@@ -1,4 +1,4 @@
-import type { ChangeEvent, ChangeEventHandler } from "react"
+import { type ChangeEvent, } from "react"
 import { useGetData } from "../actions/useGetData"
 import Table from "../components/Table"
 import type { ITableColumn, IUser } from "../types"
@@ -7,6 +7,7 @@ import type { RootState } from "../store/configure"
 import { setFilters } from "../store/employees"
 import { Eye } from "lucide-react"
 import { useNavigate } from "react-router"
+import { SearchInput, SelectInput, type IOption } from "../components/Inputs"
 
 const DEPARTMENTS: IOption[] = [
   { label: '', value: '' },
@@ -33,7 +34,7 @@ const COLUMNS: ITableColumn<IUser>[] = [
   },
   {
     id: 3,
-    header: 'Deparment',
+    header: 'Department',
     render: (row) => <>{row.department}</>
   },
   {
@@ -62,10 +63,10 @@ export default function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { filters } = useSelector((state: RootState) => state.employees)
-
   const handleFilter = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     dispatch(setFilters({ name, value }))
+
   }
 
   const { data } = useGetData({
@@ -73,11 +74,26 @@ export default function HomePage() {
     params: filters,
   })
 
+
   const actionHandlers = {
     onView: (id: string) => {
       navigate(`/employee/${id}`)
     }
   }
+
+  //  useEffect(() => {
+  //   const saved = localStorage.getItem('filters');
+  //   if (saved) {
+  //     console.log({saved})
+  //     dispatch(setFilters(JSON.parse(saved)));
+  //   }
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   if(!filters.department && !filters.search) return;
+  //   localStorage.setItem('filters', JSON.stringify(filters));
+  // }, [filters.department, filters.search]);
+
   return (
     <div>
       <Table
@@ -96,10 +112,10 @@ export default function HomePage() {
             />
             <SelectInput
               options={DEPARTMENTS}
-              id='deparment'
-              name='deparment'
+              id='department'
+              name='department'
               onChange={handleFilter}
-              value={filters.deparment}
+              value={filters.department}
             />
           </div>
         }
@@ -109,64 +125,3 @@ export default function HomePage() {
 }
 
 
-export type IOption = {
-  label: string;
-  value: string | number;
-}
-
-export type ISelect = {
-  options: IOption[];
-  name: string;
-  id: string;
-  onChange: ChangeEventHandler<HTMLSelectElement>
-  value: string;
-  placeholder?: string;
-}
-export function SelectInput({
-  onChange,
-  value,
-  options,
-  name,
-  id,
-  placeholder = "Select an option"
-}: ISelect) {
-  return (
-    <div className="input_wrapper">
-      <select
-        value={value}
-        onChange={onChange}
-        id={id} name={name}>
-        {options.map((option) => (
-          <option value={option.value || ""}>{option.label || placeholder}</option>
-        ))}
-      </select>
-    </div>
-  )
-}
-
-type ISearchInput = {
-  onChange: ChangeEventHandler<HTMLInputElement>
-  value: string;
-  name: string;
-  id: string;
-  placeholder?: string;
-}
-export function SearchInput({
-  onChange,
-  placeholder,
-  value,
-  name,
-  id
-}: ISearchInput) {
-  return (
-    <div>
-      <input
-        id={id}
-        placeholder={placeholder}
-        name={name}
-        value={value}
-        onChange={onChange}
-      />
-    </div>
-  )
-}

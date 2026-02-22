@@ -10,10 +10,16 @@ export default function ViewEmployee() {
       id: params.id ?? ""
     },
   })
+
   const employee = data?.[0]
+  if(!employee) {
+    return (
+      <div>no Employee found</div>
+    )
+  }
   return (
     <section className="employee_view_container" >
-    
+     
       <div className="card">
       <h2>Employee Details:</h2>
          <div>
@@ -21,8 +27,8 @@ export default function ViewEmployee() {
            <p>{`${employee?.firstName} ${employee?.lastName} `}</p>
          </div>
          <div>
-           <span>Full Name</span>
-           <p>{`${employee?.firstName} ${employee?.lastName} `}</p>
+           <span>Hire Date </span>
+           <p>{`${employee?.hireDate}`}</p>
          </div>
       </div>
     </section>

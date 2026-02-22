@@ -31,7 +31,9 @@ export function SelectInput({
         onChange={onChange}
         id={id} name={name}>
         {options.map((option) => (
-          <option value={option.value || ""}>{option.label || placeholder}</option>
+          <option  
+          key={option.value}
+          value={option.value || ""}>{option.label || placeholder}</option>
         ))}
       </select>
     </div>

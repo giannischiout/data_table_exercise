@@ -5,7 +5,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 export const EMPLOYEES_INITIAL_STATE = {
    filters: {
     search: '',
-    deparment: ""
+    department: "",
    }
 }
 const employeesSlice = createSlice({

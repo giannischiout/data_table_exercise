@@ -32,4 +32,5 @@ export type IUser = {
   email: string;
   department: string;
   status: UserStatus;
+  hireDate: string;
 }
