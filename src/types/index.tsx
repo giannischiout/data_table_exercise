@@ -17,7 +17,6 @@ export type ITableColumn<T> = {
 
 
 
-
 export type IUser = {
   id: number;
   firstName: string;
