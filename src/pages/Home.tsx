@@ -1,13 +1,15 @@
-import { type ChangeEvent, } from "react"
+import { useEffect, type ChangeEvent, } from "react"
 import { useGetData } from "../actions/useGetData"
 import Table from "../components/Table"
 import type { ITableColumn, IUser } from "../types"
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/configure"
-import { setFilters } from "../store/employees"
+import { setFilters, setFiltersFromStorage } from "../store/employees"
 import { Eye } from "lucide-react"
 import { useNavigate } from "react-router"
 import { SearchInput, SelectInput, type IOption } from "../components/Inputs"
+import { FILTERS_STORAGE_KEY } from "../config"
+
 
 const DEPARTMENTS: IOption[] = [
   { label: '', value: '' },
@@ -47,13 +49,14 @@ const COLUMNS: ITableColumn<IUser>[] = [
     header: 'Actions',
     render: (row, actionHandlers) => {
       return (
-        <div>
-        <div onClick={() => {
+        <div
+        className="icon_button"  
+        onClick={() => {
           actionHandlers?.onView?.(row.id.toString())
         }}>
+        
         <Eye />
         </div>
-      </div>
       )
     }
   }
@@ -81,18 +84,21 @@ export default function HomePage() {
     }
   }
 
-  //  useEffect(() => {
-  //   const saved = localStorage.getItem('filters');
-  //   if (saved) {
-  //     console.log({saved})
-  //     dispatch(setFilters(JSON.parse(saved)));
-  //   }
-  // }, [dispatch]);
+   useEffect(() => {
+    try {
+      const saved = localStorage.getItem(FILTERS_STORAGE_KEY);
+      if (saved) {
+        dispatch(setFiltersFromStorage(JSON.parse(saved)));
+      }
+    } catch (e) {
+      console.log(e)
+    }
+   
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   if(!filters.department && !filters.search) return;
-  //   localStorage.setItem('filters', JSON.stringify(filters));
-  // }, [filters.department, filters.search]);
+  useEffect(() => {
+    localStorage.setItem(FILTERS_STORAGE_KEY, JSON.stringify(filters));
+  }, [filters]);
 
   return (
     <div>

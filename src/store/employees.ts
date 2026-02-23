@@ -19,9 +19,12 @@ const employeesSlice = createSlice({
         [name]: value
       }
 
-    }
+    },
+    setFiltersFromStorage: (state, action: PayloadAction<{ search: string; department: string }>) => {
+      state.filters = action.payload;
+    },
   },
 })
 
-export const {setFilters} = employeesSlice.actions
+export const {setFilters, setFiltersFromStorage} = employeesSlice.actions
 export default employeesSlice.reducer

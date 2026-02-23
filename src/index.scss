@@ -29,9 +29,9 @@
   --color-info-muted: rgba(59, 130, 246, 0.2);
 
   --color-bg: #ffffff;
-
-  --color-text: rgba(255, 255, 255, 0.87);
-  --color-text-muted: rgba(71, 69, 69, 0.6);
+  --color-card: #dedada;
+  --color-text: rgba(21, 20, 20, 0.946);
+  --color-text-muted: rgba(90, 88, 88, 0.848);
   --color-border: rgb(228, 228, 228);
   --radius: 6px;
 }
@@ -51,6 +51,9 @@ body {
   flex-wrap: wrap;
 }
 
+.input_wrapper {
+  position: relative;
+}
 
 select,input {
   padding: 1rem 1rem;
@@ -65,8 +68,37 @@ select,input {
   }
 }
 
+select {
+  cursor: pointer;
+}
+
+.select_icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
 
 
+.icon_button {
+  background-color: var(--color-card);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-muted)
+  }
+}
 
 
 .employee_view_container {

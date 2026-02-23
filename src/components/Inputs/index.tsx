@@ -1,3 +1,4 @@
+import { ChevronDown } from "lucide-react";
 import type { ChangeEventHandler } from "react";
 
 export type IOption = {
@@ -26,6 +27,7 @@ export function SelectInput({
 }: ISelect) {
   return (
     <div className="input_wrapper">
+      <ChevronDown className="select_icon"/>
       <select
         value={value}
         onChange={onChange}

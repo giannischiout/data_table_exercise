@@ -17,7 +17,7 @@ export default function Table<T>({
         <TableHead>
           <TableRow>
             {columns.map((col) => (
-              <TableCell align={col?.align || 'left'} key={col.id}>{col.header}</TableCell>
+              <TableCell sx={{color: 'var(--color-primary)', fontWeight: 'bold'}} align={col?.align || 'left'} key={col.id}>{col.header}</TableCell>
             ))}
           </TableRow>
         </TableHead>
